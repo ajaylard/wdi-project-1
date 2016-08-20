@@ -1,5 +1,79 @@
 
 body {
-  background: green;
+  background: yellow;
+}
 
+#leftpanel {
+  background: green;
+  height: 600px;
+  width: 300px;
+  float: left;
+  display: inline;
+}
+
+#logo {
+  width:100%;
+  height:50%;
+}
+
+main {
+  background: red;
+  height: 600px;
+  width: 900px;
+  float: right;
+  align: inline-block;
+}
+
+#toppanel{
+  background: pink;
+  display: block;
+  margin-top: 50px;
+}
+
+td {
+  background: blue;
+  height: 60px;
+  width: 60px;
+  border: 2px solid black;
+  margin: 0 auto;
+  display: inline;
+  float: left;
+
+}
+
+#answerpanel{
+  background: brown;
+  display: block;
+  margin-top: 100px;
+}
+
+#bigbutton{
+  float: left;
+  height: 50px;
+  width: 100px;
+}
+#smallbutton{
+  float: left;
+  height: 50px;
+  width: 100px;
+}
+
+#targetbox{
+  background: white;
+  height: 80px;
+  width:150px;
+  display: inline-block;
+  margin-left: 150px;
+}
+
+#targetbutton{
+  float: right;
+  height: 50px;
+  width: 100px;
+}
+
+#solvebutton{
+  float: right;
+  height: 50px;
+  width: 100px;
 }
