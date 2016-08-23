@@ -6,7 +6,8 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
   <script type="text/javascript" src="js/app.js"></script>
   <link rel="stylesheet" type="text/css" href="css/style.css">
-
+  <link href="https://fonts.googleapis.com/css?family=Hammersmith+One" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Passion+One" rel="stylesheet">
 </script>
 
 </head>
@@ -14,12 +15,13 @@
   <div id="leftpanel">
     <img id="logo" src="images/logo.jpg">
     <h2>INSTRUCTIONS</h2>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-      cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-      proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    <ol>
+      <p>Start by picking your numbers. Click 'SMALL' for a small number and 'BIG' for a big number until all 6 tiles are filled.</p>
+      <p>Click the 'TARGET' button to display a random target number.</p>
+      <p>From then you have 30 seconds to get as close as possible to the target by using just the four basic arithmetic operators <br> + - × ÷</p>
+      <p>Not all 6 of the tiled numbers need to be used.</p>
+      <p>Each numbered tile can only be used once in the calculation.</p>
+    </ol>
     </div>
 
     <main>
@@ -37,13 +39,16 @@
       </div>
 
       <div id="targetpanel">
-        <button class="buttons" id="bigbutton">BIG <br> NUMBERS</button>
-        <button class="buttons"  id="smallbutton">SMALL NUMBERS</button>
+        <button class="buttons"  id="smallbutton">SMALL</button>
+        <button class="buttons" id="bigbutton">BIG</button>
         <div id="targetbox"></div>
         <button class="buttons" id="solvebutton">SOLVE</button>
         <button class="buttons" id="targetbutton">TARGET</button>
       </div>
       <div id="solvepanel">
+      <div id="timer">
+        <div id="screen">00:00:00</div>
+      </div>
         <!-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
         quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo

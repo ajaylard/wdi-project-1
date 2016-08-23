@@ -1,25 +1,44 @@
 
 body {
   background: #04082b;
-  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  font-family: 'Hammersmith One', sans-serif;
   font-weight: bold;
 }
 
 #leftpanel {
-  background: #04082b; /*green;*/
+  background: transparent; /*green;*/
   height: 600px;
   width: 300px;
   float: left;
   display: inline;
-  color: white;
-  font-size: 14px;
-  text-align: center;
   margin-left: 40px;
 }
 
+p {
+  color: white;
+  font-size: 11px;
+  text-align: left;
+  letter-spacing: 1px;
+}
+
+h2 {
+  font-size: 24px;
+  color: white;
+  text-align: center;
+  margin-left: 30px;
+  letter-spacing: 4px;
+  font-family: 'Passion One', cursive;
+  /*background: linear-gradient(#04082b, #0e3897);*/
+
+
+}
+
 #logo {
-  width:100%;
-  height:50%;
+  width:90%;
+  height:45%;
+  text-align: center;
+  padding-left: 30px;
+  
 }
 
 main {
@@ -39,7 +58,7 @@ main {
 
 }
 
-li {
+.topnums {
   background: linear-gradient(#081681,#1975ff);
   height: 60px;
   width: 60px;
@@ -48,25 +67,31 @@ li {
   float: left;
   color: white;
   font-size: 30px;
-  /*text-align: center;*/
+  text-align: center;
+  line-height: 60px;
+  font-family: 'Passion One', cursive;
+  letter-spacing: 3px;
 }
 
 #targetpanel{
   background: #04082b; /*brown;*/
   width: 700px;
-  margin-top: 150px;
+  margin-top: 170px;
   position: absolute;
   text-align: center;
 }
 
 .buttons{
   height: 50px;
-  width: 100px;
-  font-weight: bold;
-  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  width: 110px;
+  font-family: 'Passion One', cursive;
+  font-size: 18px;
+  letter-spacing: 3px;
   color: white;
   background: linear-gradient(#04082b, #081681);
-  padding-bottom: 10px;
+  padding-bottom: 20px;
+  text-align: center;
+  line-height: 50px;
   border: none;
   margin: 10px;
 }
@@ -77,6 +102,7 @@ li {
 
 #smallbutton{
   float: left;
+
 }
 
 #targetbox{
@@ -84,11 +110,13 @@ li {
   height: 90px;
   width:150px;
   display: inline-block;
-  border: 2px solid black;
   color: white;
   font-size: 50px;
   text-align: center;
-  padding-top: 22px;
+  line-height: 90px;
+  border: 3px solid #060e5a;
+  font-family: 'Passion One', cursive;
+  letter-spacing: 6px;
 }
 
 #targetbutton{
@@ -109,10 +137,39 @@ li {
 #solvepanel{
   background: #04082b; /*orange;*/
   width: 700px;
-  margin-top:300px;
+  margin-top:250px;
   padding-bottom: 200px;
   position: absolute;
   text-align: center;
 }
 
+/*/////////////////////////////timer*/
+@import url(https://fonts.googleapis.com/css?family=PT+Mono);
 
+#timer {
+  background: radial-gradient(#081681, #040821);
+  border-radius: 200px;
+  /*border: 2px solid #1975ff;*/
+  box-shadow: 0 0 3px 3px #1975ff inset;
+  height: 200px;
+  width: 200px;
+  position: relative;
+  margin: 30px auto;
+}
+
+#screen {
+  width: 160px;
+  height: 42px;
+  background-color: transparent;
+  border-radius: 4px;
+  margin: auto;
+  position: relative;
+  top: 75px;
+  text-align: center;
+  font-family: 'Passion One', cursive;
+  color: #fff;
+  line-height: 42px;
+  font-size: 40px;
+  padding: 5px;
+  letter-spacing: 2px;
+}
