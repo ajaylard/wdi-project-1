@@ -108,10 +108,12 @@ function start() {
    $('#numbers-show-answer-button').prop('disabled', true); 
   }
 
+
   function countdown() {
-    if (time === 0) {
+    if (time === -1) {
       clearTimeout();
-      solveMath()
+      solveMath();
+      $('#screen').html("TIME UP!");
     } else {
       $('#screen').html(time)
       time--;
