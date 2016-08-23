@@ -3,10 +3,56 @@
 <head>
   <meta charset="utf-8">
   <title>Countdown</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <script type="text/javascript" src="js/countdown.js"></script>
   <script type="text/javascript" src="js/app.js"></script>
   <link rel="stylesheet" type="text/css" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css?family=Hammersmith+One" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Passion+One" rel="stylesheet">
+</script>
+
 </head>
 <body>
+  <div id="leftpanel">
+    <img id="logo" src="images/logo.jpg">
+    <h2>INSTRUCTIONS</h2>
+    <ol>
+      <p>Start by picking your numbers. Click 'SMALL' for a small number and 'BIG' for a big number until all 6 tiles are filled.</p>
+      <p>Click the 'TARGET' button to display a random target number.</p>
+      <p>From then you have 30 seconds to get as close as possible to the target by using just the four basic arithmetic operators <br> + - × ÷</p>
+      <p>Not all 6 of the tiled numbers need to be used.</p>
+      <p>Each numbered tile can only be used once in the calculation.</p>
+    </ol>
+    </div>
 
+    <main>
+      <!-- <embed id="clock" src="http://orig07.deviantart.net/3a29/f/2012/053/b/d/countdown_clock_by_rapiermedia-d4qmion.swf" allowscriptaccess="never" width="480" height="360" quality="high" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer"> -->
+      <div id="toppanel">
+       <ul>
+         <li class = "topnums" id="topnum1"></li>
+         <li class = "topnums" id="topnum2"></li>
+         <li class = "topnums" id="topnum3"></li>
+         <li class = "topnums" id="topnum4"></li>
+         <li class = "topnums" id="topnum5"></li>
+         <li class = "topnums" id="topnum6"></li>
+         <button class="buttons" id="clearbutton">CLEAR</button>
+       </ul>
+      </div>
+
+      <div id="targetpanel">
+        <button class="buttons"  id="smallbutton">SMALL</button>
+        <button class="buttons" id="bigbutton">BIG</button>
+        <div id="targetbox"></div>
+        <button class="buttons" id="solvebutton">SOLVE</button>
+        <button class="buttons" id="targetbutton">TARGET</button>
+      </div>
+
+      <div id="solvepanel">
+        <div id="timer">
+          <div id="screen">00:00:00</div>
+        </div>
+        <div id="answer"></div>
+      </div>      
+  </main>
 </body>
 </html>

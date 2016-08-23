@@ -49,57 +49,6 @@
 //user presses reset to clear everything on page
 //
 
-///////////////////////////////////////////////////////////////////////
-
-  // var bigNum = ["25", "50", "75", "100"];
-//   var bigUsed =;
-//   var smallUsed = new Array();
-//   var TargetNum=0 ;
-//   // var MaxNum=5 ;
-//   // var CurrCecil=0 ;
-//   // var MaxCecil=2 ;
-//   // var NumOffSet=3 ;
-//   // var CardOffSet=9 ;
-//   // var ManEntry=0 ;
-//   // var Value=0 ;
-
-
-// var smallButton = document.getElementById("smallbutton");
-// var targetBox = document.getElementById("targetbox");
-
-// var selectedNumbers = [];
-// var bigNumbers = [25, 50, 75, 100];
-
-// bigbutton.onclick = function() {
-//   var number = bigNumbers[Math.floor(Math.random()*bigNumbers.length)];
-//   selectedNumbers.push(number);
-
-//   console.log(selectedNumbers);
-// }
-
-// smallButton.onclick = function (){
-//   var number = (Math.floor((Math.random() * 10) + 1));
-//   selectedNumbers.push(number);
-
-//   console.log(selectedNumbers);
-// }
-
-
-// };
-
-// function fillTargetBox (targetBox, ){
-//   targetBox.innerHTML  = player;
-//   targetBox.classList += player;
-// }
-
-
-// $(function getSmallNum(){
-//     // var smallNum = (document.getElementById("smallbutton").
-//     $('#smallbutton').click(function(){
-//       console.log ("clicked");
-//     });
-// })
-
 $(start)
 
 function start() {
@@ -111,6 +60,7 @@ function start() {
   var $topNums        = $('#topnums');
   var $clearButton    = $('#clearbutton');
   var $playClock      = $('playclock');
+  var $solveButton    = $('#solvebutton');
 
   var bigNumbers      = [25, 50, 75, 100];
   var smallNumbers    = [1,2,3,4,5,6,7,8,9,10];
@@ -118,10 +68,8 @@ function start() {
   var operators       = ["+", "-", "*", "/"];
   var sequence        = [0];
   var total           = 0;
-  
 
   if (selectedNumbers.length < 6) {
-
     $bigButton.on('click', function() {
       var number = bigNumbers[Math.floor(Math.random()*bigNumbers.length)];
       selectedNumbers.push(number);
@@ -133,147 +81,77 @@ function start() {
       selectedNumbers.push(number);
       $($displays[selectedNumbers.length -1]).html(number)
     });
-
   }
   
   $targetButton.on('click', function getTarget() {
-    for (var i = 0; i < selectedNumbers.length; i++) {
-      addToSequence(selectedNumbers[i]);
-    }
-    console.log(sequence, total)
-    $targetBox.html(total);
+    $targetBox.html(Math.floor(Math.random() * (899)) + 101);
   });
 
   $targetButton.on('click', function() {
     $playClock.html("true");
+  });
+
+  $solveButton.on("click", function(){
+    var target = $('#targetbox').html();
+    $('#answer').html(solve_numbers(selectedNumbers, target, false));
+
+    $solveButton.prop('disabled', true);
+    $('#numbers-show-answer-button').prop('disabled', true);
+  })
+
+  $clearButton.click(function(){
+    $('.topnums').empty();
+  });
+
+  (function() {
+    var $timer     = $('#timer');
+    var $startStop = $('#targetbutton');
+    var $reset     = $('#clearbutton');
+    var $screen    = $timer.find('#screen');
+
+    var ms = 0;
+    var s = 0;
+    var m = 0;
+
+    var timer;
+
+    function padNum(num) {
+      return num < 10 ? "0" + num : String(num);
+    }
+
+    $startStop.on("click", function() {
+      if(!$timer.hasClass('running')) {
+        $timer.addClass('running');
+        timer = setInterval(function() {
+          ms++;
+
+          if(ms > 99) {
+            ms = 0;
+            s++;
+          }
+
+          if(s > 60) {
+            s = 0;
+            m++;
+          }
+
+          $screen.text(padNum(m) + ":" + padNum(s) + ":" + padNum(ms));
+        }, 10);
+      } else {
+        $timer.removeClass('running');
+        clearTimeout(timer);
+      }
     });
 
-
-  function addToSequence(nextNumber){
-    var valid    = false;
-    var oldTotal = total;
-
-    while (!valid) {
-      // var randomOperator = operators[Math.floor(Math.random() * operators.length)];
-      var randomNumber   = Math.random() * 10;
-      var randomOperator;
-
-      if (randomNumber < 10 && randomNumber > 6) {
-        randomOperator = "+";
-        total += nextNumber;
-      } else if (randomNumber <= 6 && randomNumber > 3) {
-        randomOperator = "-";
-        total -= nextNumber;
-      } else if (randomNumber <= 3 && randomNumber > 1) {
-        randomOperator = "*";
-        total = (total * nextNumber);
-      } else if (randomNumber <= 3 && randomNumber >= 0) {
-        randomOperator = "/";
-        total = (total / nextNumber);
-      }
-
-
-      if (isInt(total) && isPositive(total)) valid = true;
-      console.log(oldTotal + " " + randomOperator + " " + nextNumber + " = " + total);
-    }
-
-    sequence.push(randomOperator);
-    sequence.push(nextNumber);
-  }
-
-  function isInt(n) {
-    return n % 1 === 0;
-  }
-
-  function isPositive(n) {
-    return n >= 0;
-  }
-  
-//clear button
-$clearButton.click(function(){
-  $('.topnums').empty();
-});
-
-
-
-/////trying ot get operations to work - divison problem 
-var operation = {
-  "+": function(n1, n2) { if (n1 < 0 || n2 < 0) return false; return n1+n2; },
-  "-": function(n1, n2) { if (n2 >= n1) return false; return n1-n2; },
-  "_": function(n2, n1) { if (n2 >= n1) return false; return n1-n2; },
-  "*": function(n1, n2) { return n1*n2; },
-  "/": function(n1, n2) { if (n2 == 0 || n1%n2 != 0) return false; return n1/n2; },
-  "?": function(n2, n1) { if (n2 == 0 || n1%n2 != 0) return false; return n1/n2; },
-};
-
-
-////display solution in solvepanel when solve is clicked!!!
-function stringify_result(serialised, target) {
-  var output = '';
-
-  serialised = serialised.slice(0);
-
-  for (var i = 0; i < serialised.length; i++) {
-    var x = serialised[i];
-
-    var args = x.slice(2);
-    output += args.join(' ' + x[1] + ' ') + ' = ' + x[0] + '\n';
-  }
-
-  var result = serialised[serialised.length-1][0];
-
-  return output;
-}
-/////////////timer//////////
-(function() {
-  var $timer = $('#timer');
-  var $startStop = $('#targetbutton');
-  var $reset = $('#clearbutton');
-  var $screen = $timer.find('#screen');
-
-  var ms = 0;
-  var s = 0;
-  var m = 0;
-
-  var timer;
-
-  function padNum(num) {
-    return num < 10 ? "0" + num : String(num);
-  }
-
-  $startStop.on("click", function() {
-    if(!$timer.hasClass('running')) {
-      $timer.addClass('running');
-      timer = setInterval(function() {
-        ms++;
-
-        if(ms > 99) {
-          ms = 0;
-          s++;
-        }
-
-        if(s > 60) {
-          s = 0;
-          m++;
-        }
-
-        $screen.text(padNum(m) + ":" + padNum(s) + ":" + padNum(ms));
-      }, 10);
-    } else {
+    $reset.on('click', function() {
       $timer.removeClass('running');
       clearTimeout(timer);
-    }
+      $screen.text("00:00:00");
+      ms = 0;
+      s = 0;
+      m = 0;
+    });
   });
-
-  $reset.on('click', function() {
-    $timer.removeClass('running');
-    clearTimeout(timer);
-    $screen.text("00:00:00");
-    ms = 0;
-    s = 0;
-    m = 0;
-  });
-});
 }
 
 

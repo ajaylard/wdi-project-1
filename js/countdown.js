@@ -1,6 +1,9 @@
 var bestdiff;
 var bestvalsums;
 
+// Creates an object that has functions for doing the operator to two numbers
+// If a condition is not met however by the answer, then it returns false
+// The false value will be used in the recursive function
 var OPS = {
   "+": function(n1, n2) { if (n1 < 0 || n2 < 0) return false; return n1+n2; },
   "-": function(n1, n2) { if (n2 >= n1) return false; return n1-n2; },
@@ -10,6 +13,7 @@ var OPS = {
   "?": function(n2, n1) { if (n2 == 0 || n1%n2 != 0) return false; return n1/n2; },
 };
 
+// How likely you should use each operator as the divide will most likely return a decimal
 var OPCOST = {
   "+": 1,
   "-": 1.05,
@@ -19,21 +23,34 @@ var OPCOST = {
   "?": 1.3,
 };
 
+// This function calls itself to work out the answer
+// numbers       - the numbers array that we need to use
+// searchedi     -
+// was_generated - 
+// target        - 
+// levels        - The number of times that the recursive function was called
+// valsums       -
+// trickshot     - 
 function _recurse_solve_numbers(numbers, searchedi, was_generated, target, levels, valsums, trickshot) {
   levels--;
 
+  // Looping through each number
   for (var i = 0; i < numbers.length-1; i++) {
+
+    // Assign a number to a temp variable
     var ni = numbers[i];
-
+    // If the number is false, then skip to the next loop
     if (ni === false) continue;
-
+    // Set the number to be false, so that it isn't used again
     numbers[i] = false;
 
+    // Loop through the numbers again
     for (var j = i+1; j < numbers.length; j++) {
+      // Choose another number
       var nj = numbers[j];
-
+      // If that number is false, that was the first number you chose
       if (nj === false) continue;
-
+      // If the index of the first loop is greater than 
       if (i < searchedi && !was_generated[i] && !was_generated[j]) continue;
 
       for (var o in OPS) {
@@ -41,10 +58,11 @@ function _recurse_solve_numbers(numbers, searchedi, was_generated, target, level
         if (r === false) continue;
 
         var op_cost = Math.abs(r);
-        while (op_cost % 10 == 0 && op_cost != 0)
-          op_cost /= 10;
+        while (op_cost % 10 == 0 && op_cost != 0) op_cost /= 10;
+
         if ((ni[0] == 10 || nj[0] == 10) && o == '*') // HACK: multiplication by 10 is cheap
           op_cost = 1;
+        
         op_cost *= OPCOST[o];
 
         var newvalsums = valsums + op_cost;
@@ -59,8 +77,10 @@ function _recurse_solve_numbers(numbers, searchedi, was_generated, target, level
       var old_was_gen = was_generated[j];
       was_generated[j] = true;
 
-      if (levels > 0 && (trickshot || bestresult[0] != target || newvalsums < bestvalsums))
+      if (levels > 0 && (trickshot || bestresult[0] != target || newvalsums < bestvalsums)) {
+        // Recursive function is calling itself again here...
         _recurse_solve_numbers(numbers, i+1, was_generated, target, levels, newvalsums, trickshot);
+      }
 
       was_generated[j] = old_was_gen;
       numbers[j] = nj;
@@ -144,22 +164,34 @@ function serialise_result(result) {
   return parts.concat([thispart]);
 }
 
+// Format the answer as a string
 function stringify_result(serialised, target) {
   var output = '';
 
+  // Make a copy of the array in JS to take the value 
   serialised = serialised.slice(0);
 
+  // Loop through the new serlized array
   for (var i = 0; i < serialised.length; i++) {
+    // Save a temporary number
     var x = serialised[i];
-
+    // The operator is stored as the second index
+    // Take everything from the second index forward 
+    // The end value to this step is x[0]
+    // 
+    // 4 + 3 = 7  => [7,+,3,4] 
     var args = x.slice(2);
     output += args.join(' ' + x[1] + ' ') + ' = ' + x[0] + '\n';
   }
 
+  // The final result
+  // The first index of the length of the array
   var result = serialised[serialised.length-1][0];
-  if (result != target)
-    output += '(off by ' + (Math.abs(result - target)) + ')\n';
 
+  // If the result does not = the target, calculate how much it is off by
+  if (result != target) output += '(off by ' + (Math.abs(result - target)) + ')\n';
+
+  // Return the output
   return output;
 }
 
@@ -178,23 +210,28 @@ function _solve_numbers(numbers, target, trickshot) {
   return bestresult;
 }
 
+// This is the function called in app.js
 function solve_numbers(numbers, target, trickshot) {
+  // Sorts the numbers
   numbers.sort();
+  // Make an array with the smallest number? 
   bestresult = [numbers[0], numbers[0]];
 
-/* see if one of these numbers is the answer; with trickshot you'd rather
-* have an interesting answer that's close than an exact answer
-*/
-if (!trickshot) {
-  for (var i = 1; i < numbers.length; i++) {
-    if (Math.abs(numbers[i] - target) < Math.abs(bestresult[0] - target)) {
-      bestresult = [numbers[i], numbers[i]];
-      bestvalsums = numbers[i];
+  // see if one of these numbers is the answer; 
+  // with trickshot you'd rather have an interesting answer that's close than an exact answer
+  // If trickshot is not true
+  if (!trickshot) {
+    // Loop through the numbers
+    for (var i = 1; i < numbers.length; i++) {
+      // If the absolute value (positive integer) of each of the numbers - target is less that the smalles number - target 
+      if (Math.abs(numbers[i] - target) < Math.abs(bestresult[0] - target)) {
+        bestresult = [numbers[i], numbers[i]];
+        bestvalsums = numbers[i];
+      }
     }
+
+    if (bestresult[0] == target) return target + " = " + target;
   }
-  if (bestresult[0] == target)
-    return target + " = " + target;
-}
 
 return stringify_result(serialise_result(tidyup_result(_solve_numbers(numbers, target, trickshot))), target);
 }

@@ -76,7 +76,7 @@ main {
 #targetpanel{
   background: #04082b; /*brown;*/
   width: 700px;
-  margin-top: 170px;
+  margin-top: 110px;
   position: absolute;
   text-align: center;
 }
@@ -137,7 +137,7 @@ main {
 #solvepanel{
   background: #04082b; /*orange;*/
   width: 700px;
-  margin-top:250px;
+  margin-top:200px;
   padding-bottom: 200px;
   position: absolute;
   text-align: center;
@@ -153,8 +153,10 @@ main {
   box-shadow: 0 0 3px 3px #1975ff inset;
   height: 200px;
   width: 200px;
-  position: relative;
   margin: 30px auto;
+  display: inline;
+  float: left;
+  margin-left: 250px;
 }
 
 #screen {
@@ -172,4 +174,11 @@ main {
   font-size: 40px;
   padding: 5px;
   letter-spacing: 2px;
+}
+
+#answer {
+  color: white;
+  white-space: pre;
+  float: right;
+  margin-top: 50px;
 }
