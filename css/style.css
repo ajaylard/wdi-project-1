@@ -28,6 +28,9 @@ h2 {
   margin-left: 30px;
   letter-spacing: 4px;
   font-family: 'Passion One', cursive;
+  background: -webkit-linear-gradient(#5c9ebe, white, white 90%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   /*background: linear-gradient(#04082b, #0e3897);*/
 
 
@@ -106,15 +109,17 @@ main {
 }
 
 #targetbox{
-  background: linear-gradient(#081681,#1975ff);
+  background: transparent;
+  background: -webkit-linear-gradient(#5c9ebe, white, white 90%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   height: 90px;
   width:150px;
   display: inline-block;
   color: white;
-  font-size: 50px;
+  font-size: 70px;
   text-align: center;
   line-height: 90px;
-  border: 3px solid #060e5a;
   font-family: 'Passion One', cursive;
   letter-spacing: 6px;
 }
@@ -135,7 +140,7 @@ main {
 }
 
 #solvepanel{
-  background: #04082b; /*orange;*/
+  background:#04082b
   width: 700px;
   margin-top:200px;
   padding-bottom: 200px;
@@ -171,9 +176,12 @@ main {
   font-family: 'Passion One', cursive;
   color: #fff;
   line-height: 42px;
-  font-size: 40px;
+  font-size: 70px;
   padding: 5px;
   letter-spacing: 2px;
+  background: -webkit-linear-gradient(#5c9ebe, white, white 90%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 #answer {
@@ -181,4 +189,12 @@ main {
   white-space: pre;
   float: right;
   margin-top: 50px;
+  font-size: 20px;
+  font-family: 'Passion One', cursive;
+  letter-spacing: 5px;
+  margin-left: 50px;
 }
+
+
+
+

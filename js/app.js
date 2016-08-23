@@ -68,6 +68,7 @@ function start() {
   var operators       = ["+", "-", "*", "/"];
   var sequence        = [0];
   var total           = 0;
+  var time            = 30;
 
   if (selectedNumbers.length < 6) {
     $bigButton.on('click', function() {
@@ -85,73 +86,87 @@ function start() {
   
   $targetButton.on('click', function getTarget() {
     $targetBox.html(Math.floor(Math.random() * (899)) + 101);
+
+    setInterval(countdown, 1000);
   });
 
   $targetButton.on('click', function() {
     $playClock.html("true");
   });
 
-  $solveButton.on("click", function(){
-    var target = $('#targetbox').html();
-    $('#answer').html(solve_numbers(selectedNumbers, target, false));
-
-    $solveButton.prop('disabled', true);
-    $('#numbers-show-answer-button').prop('disabled', true);
-  })
+  $solveButton.on("click", solveMath)
 
   $clearButton.click(function(){
-    $('.topnums').empty();
+    location.reload();
   });
 
-  (function() {
-    var $timer     = $('#timer');
-    var $startStop = $('#targetbutton');
-    var $reset     = $('#clearbutton');
-    var $screen    = $timer.find('#screen');
+  function solveMath() {
+   var target = $('#targetbox').html();
+   $('#answer').html(solve_numbers(selectedNumbers, target, false));
 
-    var ms = 0;
-    var s = 0;
-    var m = 0;
+   $solveButton.prop('disabled', true);
+   $('#numbers-show-answer-button').prop('disabled', true); 
+  }
 
-    var timer;
-
-    function padNum(num) {
-      return num < 10 ? "0" + num : String(num);
+  function countdown() {
+    if (time === 0) {
+      clearTimeout();
+      solveMath()
+    } else {
+      $('#screen').html(time)
+      time--;
     }
+  }
 
-    $startStop.on("click", function() {
-      if(!$timer.hasClass('running')) {
-        $timer.addClass('running');
-        timer = setInterval(function() {
-          ms++;
+  // (function() {
+  //   var $timer     = $('#timer');
+  //   var $startStop = $('#targetbutton');
+  //   var $reset     = $('#clearbutton');
+  //   var $screen    = $timer.find('#screen');
 
-          if(ms > 99) {
-            ms = 0;
-            s++;
-          }
+  //   var ms = 0;
+  //   var s = 0;
+  //   var m = 0;
 
-          if(s > 60) {
-            s = 0;
-            m++;
-          }
+  //   var timer;
 
-          $screen.text(padNum(m) + ":" + padNum(s) + ":" + padNum(ms));
-        }, 10);
-      } else {
-        $timer.removeClass('running');
-        clearTimeout(timer);
-      }
-    });
+  //   function padNum(num) {
+  //     return num < 10 ? "0" + num : String(num);
+  //   }
 
-    $reset.on('click', function() {
-      $timer.removeClass('running');
-      clearTimeout(timer);
-      $screen.text("00:00:00");
-      ms = 0;
-      s = 0;
-      m = 0;
-    });
-  });
+  //   $startStop.on("click", function() {
+  //     if(!$timer.hasClass('running')) {
+  //       $timer.addClass('running');
+  //       timer = setInterval(function() {
+  //         ms++;
+
+  //         if(ms > 99) {
+  //           ms = 0;
+  //           s++;
+  //         }
+
+  //         if(s > 60) {
+  //           s = 0;
+  //           m++;
+  //         }
+
+  //         $screen.text(padNum(m) + ":" + padNum(s) + ":" + padNum(ms));
+  //       }, 10);
+  //     } else {
+  //       $timer.removeClass('running');
+  //       clearTimeout(timer);
+  //     }
+  //   });
+
+  //   $reset.on('click', function() {
+  //     $timer.removeClass('running');
+  //     clearTimeout(timer);
+  //     $screen.text("00:00:00");
+  //     ms = 0;
+  //     s = 0;
+  //     m = 0;
+  //   });
+  // });
 }
 
 
