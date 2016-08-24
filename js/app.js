@@ -94,6 +94,12 @@ function start() {
     $playClock.html("true");
   });
 
+  var audio = $("#soundclip")[0];
+        console.log(audio);
+    $targetButton.on('click', function() {
+        audio.play();
+    });
+
   $solveButton.on("click", solveMath)
 
   $clearButton.click(function(){
@@ -113,7 +119,7 @@ function start() {
     if (time === -1) {
       clearTimeout();
       solveMath();
-      $('#screen').html("TIME UP!");
+      $('#screen').html("TIME'S UP!");
     } else {
       $('#screen').html(time)
       time--;

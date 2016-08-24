@@ -223,7 +223,7 @@ function solve_numbers(numbers, target, trickshot) {
   if (!trickshot) {
     // Loop through the numbers
     for (var i = 1; i < numbers.length; i++) {
-      // If the absolute value (positive integer) of each of the numbers - target is less that the smalles number - target 
+      // If the absolute value (positive integer) of each of the numbers - target is less that the smallest number - target 
       if (Math.abs(numbers[i] - target) < Math.abs(bestresult[0] - target)) {
         bestresult = [numbers[i], numbers[i]];
         bestvalsums = numbers[i];
